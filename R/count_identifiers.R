@@ -1,10 +1,9 @@
 #' Count OAI-PMH identifiers for a data provider.
 #'
 #' @export
-#' @param url OAI-PMH base url
+#' @template url_ddd
 #' @param prefix Specifies the metadata format that the records will be
 #'     returned in.
-#' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
 #' count_identifiers()
 #' count_identifiers(c(
@@ -20,12 +19,12 @@
 count_identifiers <- function(url = "http://oai.datacite.org/oai", prefix = 'oai_dc', ...) {
   check_url(url)
   args <- sc(list(verb = 'ListIdentifiers', metadataPrefix = prefix))
-  rbind_fill(lapply(url, ci, args = args, ...))
+  rbind.fill(lapply(url, ci, args = args, ...))
 }
 
 ci <- function(x, args, ...) {
   res <- GET(x, query = args, ...)
-  xml <- xml2::read_xml(content(res, "text"))
+  xml <- xml2::read_xml(content(res, "text", encoding = "UTF-8"))
   children <- xml_children(xml_children(xml))
   count <- as.numeric(
     xml_attr(

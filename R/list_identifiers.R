@@ -1,7 +1,8 @@
 #' List OAI-PMH identifiers
 #'
 #' @export
-#' @param url OAI-PMH base url
+#' @template url_ddd
+#' @template as
 #' @param prefix Specifies the metadata format that the records will be
 #'     returned in.
 #' @param from specifies that records returned must have been created/update/deleted
@@ -11,9 +12,6 @@
 #' @param set specifies the set that returned records must belong to.
 #' @param token a token previously provided by the server to resume a request
 #'     where it last left off.
-#' @param as (character) What to return. One of "df" (for data.frame; default),
-#'     "list", or "raw" (raw text)
-#' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
 #' # from
 #' today <- format(Sys.Date(), "%Y-%m-%d")
@@ -37,16 +35,9 @@
 list_identifiers <- function(url = "http://oai.datacite.org/oai", prefix = "oai_dc", from = NULL,
                              until = NULL, set = NULL, token = NULL, as = "df", ...) {
   check_url(url)
+  if (!is.null(token)) from <- until <- set <- prefix <- NULL
   args <- sc(list(verb = "ListIdentifiers", metadataPrefix = prefix, from = from,
-                  until = until, set = set, token = token))
+                  until = until, set = set, resumptionToken = token))
   out <- while_oai(url, args, token, as, ...)
   oai_give(out, as, "ListRecords")
-}
-
-parse_listid <- function(x, as = "df") {
-  sc(lapply(x, function(z) {
-    if (xml2::xml_name(z) != "resumptionToken") {
-      get_headers(z, as = as)
-    }
-  }))
 }
