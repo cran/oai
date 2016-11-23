@@ -29,32 +29,24 @@ condition <- function(subclass, message, call = sys.call(-1), ...) {
 is.condition <- function(x) inherits(x, "condition")
 
 # return result from main oai functions --------------
-oai_give <- function(x, as, type) {
+oai_give <- function(x, as) {
   if (!as %in% c('df', 'list', 'raw')) {
-    stop(sprintf("'%s' not in acceptable set: df, list, raw", as) , call. = FALSE)
+    stop(sprintf("'%s' not in acceptable set: df, list, raw", as) ,
+         call. = FALSE)
   }
-  switch(as,
-         df = {
-           structure(rbind.fill(x),
-                     class = c("oai_df", "data.frame"),
-                     type = type)
-         },
-         list = x,
-         raw = x
+  switch(
+    as,
+    df = tibble::as_data_frame(rbind.fill(x)),
+    list = x,
+    raw = x
   )
 }
-
-#' @export
-print.oai_df <- function(x, ..., n = 10) {
-  cat(sprintf("<%s> %s X %s", attr(x, "type"), NROW(x), NCOL(x)), "\n\n")
-  trunc_mat(x, n = n)
-}
-
 
 # check urls ----------------------------------------
 check_url <- function(x) {
   if (!all(is.url(x))) {
-    stop("One or more of your URLs appears to not be a proper URL", call. = FALSE)
+    stop("One or more of your URLs appears to not be a proper URL",
+         call. = FALSE)
   }
 }
 
@@ -77,16 +69,17 @@ get_data <- function(x, as = "df") {
       tmp <- xml2::xml_children(z)
       hd <- get_headers(tmp[[1]], as = as)
       met <- get_metadata(tmp, as = as)
-      switch(as,
-             df = {
-               if (!is.null(met)) {
-                 data.frame(hd, met, stringsAsFactors = FALSE)
-               } else {
-                 hd
-               }
-             },
-             list = list(headers = hd, metadata = met),
-             raw = z
+      switch(
+        as,
+        df = {
+          if (!is.null(met)) {
+            data.frame(hd, met, stringsAsFactors = FALSE)
+          } else {
+            hd
+          }
+        },
+        list = list(headers = hd, metadata = met),
+        raw = z
       )
     }
   }))
@@ -94,7 +87,7 @@ get_data <- function(x, as = "df") {
 
 get_headers <- function(m, as = "df") {
   tmpm <- lapply(xml2::xml_children(m), function(w) {
-    as.list(setNames(xml2::xml_text(w), xml2::xml_name(w)))
+    as.list(stats::setNames(xml2::xml_text(w), xml2::xml_name(w)))
   })
   switch(as, df = rbind_df(tmpm), list = unlist(tmpm, recursive = FALSE))
 }
@@ -106,7 +99,7 @@ get_metadata <- function(x, as = "df") {
   } else {
     tmp <- xml2::xml_children(xml2::xml_children(x))
     tmpm <- lapply(tmp, function(w) {
-      as.list(setNames(xml2::xml_text(w), xml2::xml_name(w)))
+      as.list(stats::setNames(xml2::xml_text(w), xml2::xml_name(w)))
     })
     switch(as, df = rbind_df(tmpm), list = unlist(tmpm, recursive = FALSE))
   }
@@ -117,22 +110,23 @@ rbind_df <- function(x) {
 }
 
 get_sets <- function(x, as = "df") {
-  switch(as,
-         df = {
-           rbind.fill(sc(lapply(x, function(z) {
-             if (xml2::xml_name(z) != "resumptionToken") {
-               tmp <- xml2::xml_children(z)
-               rbind_df(as.list(setNames(xml2::xml_text(tmp), xml2::xml_name(tmp))))
-             }
-           })))
-         },
-         list = {
-           sc(lapply(x, function(z) {
-             if (xml2::xml_name(z) != "resumptionToken") {
-               tmp <- xml2::xml_children(z)
-               as.list(setNames(xml2::xml_text(tmp), xml2::xml_name(tmp)))
-             }
-           }))
-         }
+  switch(
+    as,
+    df = {
+      rbind.fill(sc(lapply(x, function(z) {
+        if (xml2::xml_name(z) != "resumptionToken") {
+          tmp <- xml2::xml_children(z)
+          rbind_df(as.list(stats::setNames(xml2::xml_text(tmp), xml2::xml_name(tmp))))
+        }
+      })))
+    },
+    list = {
+      sc(lapply(x, function(z) {
+        if (xml2::xml_name(z) != "resumptionToken") {
+          tmp <- xml2::xml_children(z)
+          as.list(stats::setNames(xml2::xml_text(tmp), xml2::xml_name(tmp)))
+        }
+      }))
+    }
   )
 }

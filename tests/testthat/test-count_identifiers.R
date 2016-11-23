@@ -29,8 +29,8 @@ test_that("count_identifiers - works with many input urls", {
 test_that("count_identifiers - prefix param works", {
   skip_on_cran()
 
-  aa <- count_identifiers("http://oai.datacite.org/oai", prefix = "oai_dc")
-  bb <- count_identifiers("http://oai.datacite.org/oai", prefix = "oai_datacite")
+  aa <- count_identifiers(prefix = "oai_dc")
+  bb <- count_identifiers(prefix = "oai_datacite")
 
   expect_is(aa, "data.frame")
   expect_is(bb, "data.frame")
@@ -49,8 +49,6 @@ test_that("count_identifiers - curl options", {
 test_that("count_identifiers fails well", {
   skip_on_cran()
 
-  expect_error(list_sets(token = 454),
-               "The value of the resumptionToken argument is invalid or expired")
-  expect_error(list_sets("stuff"),
-               "One or more of your URLs")
+  expect_error(count_identifiers(5), "One or more of your URLs")
+  expect_error(count_identifiers(prefix = 5), "cannotDisseminateFormat")
 })
