@@ -4,14 +4,16 @@
 \alias{count_identifiers}
 \title{Count OAI-PMH identifiers for a data provider.}
 \usage{
-count_identifiers(url = "http://oai.datacite.org/oai", prefix = "oai_dc",
-  ...)
+count_identifiers(url = "http://export.arxiv.org/oai2",
+  prefix = "oai_dc", ...)
 }
 \arguments{
-\item{url}{(character) OAI-PMH base url}
+\item{url}{(character) OAI-PMH base url. Defaults to the URL for
+arXiv's OAI-PMH server (http://export.arxiv.org/oai2)
+or GBIF's OAI-PMH server (http://api.gbif.org/v1/oai-pmh/registry)}
 
 \item{prefix}{Specifies the metadata format that the records will be
-returned in.}
+returned in}
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}}
 }
@@ -28,15 +30,9 @@ know.
 \examples{
 \dontrun{
 count_identifiers()
-count_identifiers(c(
- "http://oai.datacite.org/oai",
- "http://archivesic.ccsd.cnrs.fr/oai/oai.php",
- "http://www.hindawi.com/oai-pmh/oai.aspx"
-))
 
 # curl options
-library("httr")
-count_identifiers(config = verbose())
+# library("httr")
+# count_identifiers(config = verbose())
 }
 }
-

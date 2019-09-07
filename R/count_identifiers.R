@@ -3,28 +3,25 @@
 #' @export
 #' @template url_ddd
 #' @param prefix Specifies the metadata format that the records will be
-#'     returned in.
+#' returned in
 #' @details Note that some OAI providers do not include the entry
-#' \code{completeListSize}
-#' (\url{http://www.openarchives.org/OAI/openarchivesprotocol.html#FlowControl})
+#' `completeListSize`
+#' (<http://www.openarchives.org/OAI/openarchivesprotocol.html#FlowControl>)
 #' in which case we return an NA - which does not mean 0, but rather we don't
 #' know.
 #' @examples \dontrun{
 #' count_identifiers()
-#' count_identifiers(c(
-#'  "http://oai.datacite.org/oai",
-#'  "http://archivesic.ccsd.cnrs.fr/oai/oai.php",
-#'  "http://www.hindawi.com/oai-pmh/oai.aspx"
-#' ))
 #'
 #' # curl options
-#' library("httr")
-#' count_identifiers(config = verbose())
+#' # library("httr")
+#' # count_identifiers(config = verbose())
 #' }
-count_identifiers <- function(url = "http://oai.datacite.org/oai", prefix = 'oai_dc', ...) {
+count_identifiers <- function(url = "http://export.arxiv.org/oai2", 
+  prefix = 'oai_dc', ...) {
+
   check_url(url)
   args <- sc(list(verb = 'ListIdentifiers', metadataPrefix = prefix))
-  rbind.fill(lapply(url, ci, args = args, ...))
+  plyr::rbind.fill(lapply(url, ci, args = args, ...))
 }
 
 ci <- function(x, args, ...) {

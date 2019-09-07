@@ -2,29 +2,25 @@
 % Please edit documentation in R/oai-package.R
 \docType{package}
 \name{oai-package}
-\alias{oai}
 \alias{oai-package}
+\alias{oai}
 \title{OAI-PMH Client}
 \description{
-oai
-}
-\section{Introduction}{
-
-oai is an R client to work with OAI-PMH (Open Archives Initiative Protocol
-for Metadata Harvesting) services, a protocol developed by the
-[Open Archives Initiative](https://en.wikipedia.org/wiki/Open_Archives_Initiative).
+oai is an R client to work with OAI-PMH (Open Archives
+Initiative Protocol for Metadata Harvesting) services, a protocol
+developed by the Open Archives Initiative
+(https://en.wikipedia.org/wiki/Open_Archives_Initiative).
 OAI-PMH uses XML data format transported over HTTP.
 }
-
 \section{OAI-PMH Info}{
 
 See the OAI-PMH V2 specification at
 \url{http://www.openarchives.org/OAI/openarchivesprotocol.html}
 }
 
-\section{oai package details}{
+\section{Implementation details}{
 
-oai is built on \code{xml2} and `httr`. In addition, we give back
+oai is built on \pkg{xml2} and \pkg{httr}. In addition, we give back
 data.frame's whenever possible to make data comprehension, manipulation,
 and visualization easier. We also have functions to fetch a large directory
 of OAI-PMH services - it isn't exhaustive, but does contain a lot.
@@ -42,8 +38,16 @@ loop for you internally until we get all records. We may in the future
 expose e.g., a \code{limit} parameter so you can say how many records
 you want, but we haven't done this yet.
 }
+
+\section{Acknowledgements}{
+
+Michal Bojanowski contributions were supported by (Polish) National Science
+Center (NCN) through grant 2012/07/D/HS6/01971.
+}
+
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
+
+Michal Bojanowski \email{michal2992@gmail.com}
 }
 \keyword{package}
-

@@ -209,7 +209,11 @@ hr {
 
 <h1>oai introduction</h1>
 
-<p>A general purpose client to work with any &#39;OAI-PMH&#39; service. The &#39;OAI-PMH&#39; protocol is described at <a href="http://www.openarchives.org/OAI/openarchivesprotocol.html">http://www.openarchives.org/OAI/openarchivesprotocol.html</a>. The main functions follow the OAI-PMH verbs:</p>
+<p>A general purpose client to work with any &#39;OAI-PMH&#39; service. </p>
+
+<p>The &#39;OAI-PMH&#39; protocol is described at <a href="http://www.openarchives.org/OAI/openarchivesprotocol.html">http://www.openarchives.org/OAI/openarchivesprotocol.html</a>.</p>
+
+<p>The main functions follow the OAI-PMH verbs:</p>
 
 <ul>
 <li><code>GetRecord</code></li>
@@ -240,10 +244,10 @@ hr {
 <h2>Identify</h2>
 
 <pre><code class="r">id(&quot;http://oai.datacite.org/oai&quot;)
-#&gt;   repositoryName                     baseURL protocolVersion
-#&gt; 1   DataCite MDS http://oai.datacite.org/oai             2.0
-#&gt;           adminEmail    earliestDatestamp deletedRecord
-#&gt; 1 admin@datacite.org 2011-01-01T00:00:00Z    persistent
+#&gt;   repositoryName                      baseURL protocolVersion
+#&gt; 1   DataCite MDS https://oai.datacite.org/oai             2.0
+#&gt;             adminEmail    earliestDatestamp deletedRecord
+#&gt; 1 support@datacite.org 2011-01-01T00:00:00Z    persistent
 #&gt;            granularity compression compression.1
 #&gt; 1 YYYY-MM-DDThh:mm:ssZ        gzip       deflate
 #&gt;                                      description
@@ -252,144 +256,111 @@ hr {
 
 <h2>ListIdentifiers</h2>
 
-<pre><code class="r">list_identifiers(from = &#39;2011-05-01T&#39;, until = &#39;2011-09-01T&#39;)
-#&gt; # A tibble: 889 × 6
-#&gt;                    identifier            datestamp setSpec setSpec.1
-#&gt;                         &lt;chr&gt;                &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;
-#&gt; 1  oai:oai.datacite.org:32153 2011-06-08T08:57:11Z     TIB  TIB.WDCC
-#&gt; 2  oai:oai.datacite.org:32200 2011-06-20T08:12:41Z     TIB TIB.DAGST
-#&gt; 3  oai:oai.datacite.org:32220 2011-06-28T14:11:08Z     TIB TIB.DAGST
-#&gt; 4  oai:oai.datacite.org:32241 2011-06-30T13:24:45Z     TIB TIB.DAGST
-#&gt; 5  oai:oai.datacite.org:32255 2011-07-01T12:09:24Z     TIB TIB.DAGST
-#&gt; 6  oai:oai.datacite.org:32282 2011-07-05T09:08:10Z     TIB TIB.DAGST
-#&gt; 7  oai:oai.datacite.org:32309 2011-07-06T12:30:54Z     TIB TIB.DAGST
-#&gt; 8  oai:oai.datacite.org:32310 2011-07-06T12:42:32Z     TIB TIB.DAGST
-#&gt; 9  oai:oai.datacite.org:32325 2011-07-07T11:17:46Z     TIB TIB.DAGST
-#&gt; 10 oai:oai.datacite.org:32326 2011-07-07T11:18:47Z     TIB TIB.DAGST
-#&gt; # ... with 879 more rows, and 2 more variables: setSpec.2 &lt;chr&gt;,
-#&gt; #   setSpec.3 &lt;chr&gt;
+<pre><code class="r">list_identifiers(from = &#39;2018-05-01T&#39;, until = &#39;2018-09-01T&#39;)
+#&gt; # A tibble: 2,904 x 5
+#&gt;    identifier        datestamp    setSpec           setSpec.1     setSpec.2
+#&gt;    &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;             &lt;chr&gt;         &lt;chr&gt;    
+#&gt;  1 cbe4cdda-2045-41… 2018-08-30T… installation:842… dataset_type… country:…
+#&gt;  2 3fb7ddd8-07c0-49… 2018-08-28T… installation:842… dataset_type… country:…
+#&gt;  3 34585f24-1ffe-47… 2018-08-28T… installation:842… dataset_type… country:…
+#&gt;  4 8ac24ec8-1e7b-40… 2018-08-28T… installation:842… dataset_type… country:…
+#&gt;  5 e381b970-9b62-46… 2018-08-28T… installation:842… dataset_type… country:…
+#&gt;  6 4496b1b1-1ea9-4e… 2018-08-28T… installation:842… dataset_type… country:…
+#&gt;  7 fc5d68a6-b511-4c… 2018-08-27T… installation:73e… dataset_type… country:…
+#&gt;  8 5e0073bc-de2a-4b… 2018-08-27T… installation:688… dataset_type… country:…
+#&gt;  9 ab2684cf-62e5-4f… 2018-08-27T… installation:804… dataset_type… country:…
+#&gt; 10 34fbcf59-d9bb-47… 2018-08-27T… installation:7c5… dataset_type… country:…
+#&gt; # … with 2,894 more rows
 </code></pre>
 
 <h2>Count Identifiers</h2>
 
 <pre><code class="r">count_identifiers()
-#&gt;                           url   count
-#&gt; 1 http://oai.datacite.org/oai 8333894
 </code></pre>
 
 <h2>ListRecords</h2>
 
-<pre><code class="r">list_records(from = &#39;2011-05-01T&#39;, until = &#39;2011-08-15T&#39;)
-#&gt; # A tibble: 109 × 44
-#&gt;                    identifier            datestamp setSpec setSpec.1
-#&gt;                         &lt;chr&gt;                &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;
-#&gt; 1  oai:oai.datacite.org:32153 2011-06-08T08:57:11Z     TIB  TIB.WDCC
-#&gt; 2  oai:oai.datacite.org:32200 2011-06-20T08:12:41Z     TIB TIB.DAGST
-#&gt; 3  oai:oai.datacite.org:32220 2011-06-28T14:11:08Z     TIB TIB.DAGST
-#&gt; 4  oai:oai.datacite.org:32241 2011-06-30T13:24:45Z     TIB TIB.DAGST
-#&gt; 5  oai:oai.datacite.org:32255 2011-07-01T12:09:24Z     TIB TIB.DAGST
-#&gt; 6  oai:oai.datacite.org:32282 2011-07-05T09:08:10Z     TIB TIB.DAGST
-#&gt; 7  oai:oai.datacite.org:32309 2011-07-06T12:30:54Z     TIB TIB.DAGST
-#&gt; 8  oai:oai.datacite.org:32310 2011-07-06T12:42:32Z     TIB TIB.DAGST
-#&gt; 9  oai:oai.datacite.org:32325 2011-07-07T11:17:46Z     TIB TIB.DAGST
-#&gt; 10 oai:oai.datacite.org:32326 2011-07-07T11:18:47Z     TIB TIB.DAGST
-#&gt; # ... with 99 more rows, and 40 more variables: title &lt;chr&gt;,
-#&gt; #   creator &lt;chr&gt;, creator.1 &lt;chr&gt;, creator.2 &lt;chr&gt;, creator.3 &lt;chr&gt;,
-#&gt; #   creator.4 &lt;chr&gt;, creator.5 &lt;chr&gt;, creator.6 &lt;chr&gt;, creator.7 &lt;chr&gt;,
-#&gt; #   publisher &lt;chr&gt;, date &lt;chr&gt;, identifier.2 &lt;chr&gt;, identifier.1 &lt;chr&gt;,
-#&gt; #   subject &lt;chr&gt;, description &lt;chr&gt;, description.1 &lt;chr&gt;,
-#&gt; #   contributor &lt;chr&gt;, language &lt;chr&gt;, type &lt;chr&gt;, type.1 &lt;chr&gt;,
-#&gt; #   format &lt;chr&gt;, format.1 &lt;chr&gt;, rights &lt;chr&gt;, subject.1 &lt;chr&gt;,
-#&gt; #   relation &lt;chr&gt;, subject.2 &lt;chr&gt;, subject.3 &lt;chr&gt;, subject.4 &lt;chr&gt;,
-#&gt; #   setSpec.2 &lt;chr&gt;, setSpec.3 &lt;chr&gt;, format.2 &lt;chr&gt;, subject.5 &lt;chr&gt;,
-#&gt; #   subject.6 &lt;chr&gt;, subject.7 &lt;chr&gt;, description.2 &lt;chr&gt;,
-#&gt; #   description.3 &lt;chr&gt;, description.4 &lt;chr&gt;, description.5 &lt;chr&gt;,
-#&gt; #   title.1 &lt;chr&gt;, contributor.1 &lt;chr&gt;
+<pre><code class="r">list_records(from = &#39;2018-05-01T&#39;, until = &#39;2018-05-15T&#39;)
+#&gt; # A tibble: 44 x 26
+#&gt;    identifier datestamp setSpec setSpec.1 setSpec.2 title publisher
+#&gt;    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    
+#&gt;  1 18799ce9-… 2018-05-… instal… dataset_… country:… Bird… Sokoine …
+#&gt;  2 79f51633-… 2018-05-… instal… dataset_… country:… Impl… Aïgos SAS
+#&gt;  3 f83746ee-… 2018-05-… instal… dataset_… country:… NDFF… Dutch Na…
+#&gt;  4 a3533a61-… 2018-05-… instal… dataset_… country:… EDP … EDP - En…
+#&gt;  5 ba9b66a3-… 2018-05-… instal… dataset_… country:… Ende… Sokoine …
+#&gt;  6 78b696d9-… 2018-05-… instal… dataset_… country:… Ende… Sokoine …
+#&gt;  7 c791b255-… 2018-05-… instal… dataset_… country:… Ende… Sokoine …
+#&gt;  8 b929ccda-… 2018-05-… instal… dataset_… country:… List… Sokoine …
+#&gt;  9 da285c2a-… 2018-05-… instal… dataset_… country:… Moni… Corporac…
+#&gt; 10 87372877-… 2018-05-… instal… dataset_… country:… Moni… Corporac…
+#&gt; # … with 34 more rows, and 19 more variables: identifier.1 &lt;chr&gt;,
+#&gt; #   subject &lt;chr&gt;, source &lt;chr&gt;, description &lt;chr&gt;, description.1 &lt;chr&gt;,
+#&gt; #   type &lt;chr&gt;, creator &lt;chr&gt;, date &lt;chr&gt;, language &lt;chr&gt;, coverage &lt;chr&gt;,
+#&gt; #   coverage.1 &lt;chr&gt;, format &lt;chr&gt;, source.1 &lt;chr&gt;, subject.1 &lt;chr&gt;,
+#&gt; #   coverage.2 &lt;chr&gt;, creator.1 &lt;chr&gt;, description.2 &lt;chr&gt;,
+#&gt; #   creator.2 &lt;chr&gt;, subject.2 &lt;chr&gt;
 </code></pre>
 
 <h2>GetRecords</h2>
 
-<pre><code class="r">get_records(c(&quot;oai:oai.datacite.org:32255&quot;, &quot;oai:oai.datacite.org:32325&quot;))
-#&gt; # A tibble: 2 × 23
-#&gt;                   identifier            datestamp setSpec setSpec.1
-#&gt;                        &lt;chr&gt;                &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;
-#&gt; 1 oai:oai.datacite.org:32255 2011-07-01T12:09:24Z     TIB TIB.DAGST
-#&gt; 2 oai:oai.datacite.org:32325 2011-07-07T11:17:46Z     TIB TIB.DAGST
-#&gt; # ... with 19 more variables: title &lt;chr&gt;, creator &lt;chr&gt;, creator.1 &lt;chr&gt;,
-#&gt; #   creator.2 &lt;chr&gt;, creator.3 &lt;chr&gt;, publisher &lt;chr&gt;, date &lt;chr&gt;,
-#&gt; #   identifier.1 &lt;chr&gt;, subject &lt;chr&gt;, subject.1 &lt;chr&gt;, description &lt;chr&gt;,
-#&gt; #   description.1 &lt;chr&gt;, contributor &lt;chr&gt;, language &lt;chr&gt;, type &lt;chr&gt;,
-#&gt; #   type.1 &lt;chr&gt;, format &lt;chr&gt;, format.1 &lt;chr&gt;, rights &lt;chr&gt;
+<pre><code class="r">ids &lt;- c(&quot;87832186-00ea-44dd-a6bf-c2896c4d09b4&quot;, &quot;d981c07d-bc43-40a2-be1f-e786e25106ac&quot;)
+get_records(ids)
+#&gt; $`87832186-00ea-44dd-a6bf-c2896c4d09b4`
+#&gt; $`87832186-00ea-44dd-a6bf-c2896c4d09b4`$header
+#&gt; # A tibble: 1 x 3
+#&gt;   identifier             datestamp      setSpec                            
+#&gt;   &lt;chr&gt;                  &lt;chr&gt;          &lt;chr&gt;                              
+#&gt; 1 87832186-00ea-44dd-a6… 2018-06-29T12… installation:729a7375-b120-4e4f-bb…
+#&gt; 
+#&gt; $`87832186-00ea-44dd-a6bf-c2896c4d09b4`$metadata
+#&gt; # A tibble: 0 x 0
+#&gt; 
+#&gt; 
+#&gt; $`d981c07d-bc43-40a2-be1f-e786e25106ac`
+#&gt; $`d981c07d-bc43-40a2-be1f-e786e25106ac`$header
+#&gt; # A tibble: 1 x 3
+#&gt;   identifier             datestamp      setSpec                            
+#&gt;   &lt;chr&gt;                  &lt;chr&gt;          &lt;chr&gt;                              
+#&gt; 1 d981c07d-bc43-40a2-be… 2018-01-21T21… installation:804b8dd0-07ac-4a30-bf…
+#&gt; 
+#&gt; $`d981c07d-bc43-40a2-be1f-e786e25106ac`$metadata
+#&gt; # A tibble: 1 x 12
+#&gt;   title publisher identifier subject source description type  creator date 
+#&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;
+#&gt; 1 Pece… Institut… https://w… peces,… http:… Caracteriz… Data… Fernan… 2018…
+#&gt; # … with 3 more variables: language &lt;chr&gt;, coverage &lt;chr&gt;, format &lt;chr&gt;
 </code></pre>
 
 <h2>List MetadataFormats</h2>
 
-<pre><code class="r">list_metadataformats(id = &quot;oai:oai.datacite.org:32348&quot;)
-#&gt; $`oai:oai.datacite.org:32348`
-#&gt;   metadataPrefix
-#&gt; 1         oai_dc
-#&gt; 2       datacite
-#&gt; 3   oai_datacite
-#&gt;                                                        schema
-#&gt; 1              http://www.openarchives.org/OAI/2.0/oai_dc.xsd
-#&gt; 2 http://schema.datacite.org/meta/nonexistant/nonexistant.xsd
-#&gt; 3              http://schema.datacite.org/oai/oai-1.0/oai.xsd
+<pre><code class="r">list_metadataformats(id = &quot;87832186-00ea-44dd-a6bf-c2896c4d09b4&quot;)
+#&gt; $`87832186-00ea-44dd-a6bf-c2896c4d09b4`
+#&gt;   metadataPrefix                                                   schema
+#&gt; 1         oai_dc           http://www.openarchives.org/OAI/2.0/oai_dc.xsd
+#&gt; 2            eml http://rs.gbif.org/schema/eml-gbif-profile/1.0.2/eml.xsd
 #&gt;                             metadataNamespace
 #&gt; 1 http://www.openarchives.org/OAI/2.0/oai_dc/
-#&gt; 2      http://datacite.org/schema/nonexistant
-#&gt; 3     http://schema.datacite.org/oai/oai-1.0/
+#&gt; 2          eml://ecoinformatics.org/eml-2.1.1
 </code></pre>
 
 <h2>List Sets</h2>
 
-<pre><code class="r">list_sets(&quot;http://oai.datacite.org/oai&quot;)
-#&gt; # A tibble: 1,651 × 2
-#&gt;                     setSpec
-#&gt;                       &lt;chr&gt;
-#&gt; 1                REFQUALITY
-#&gt; 2                      ANDS
-#&gt; 3           ANDS.REFQUALITY
-#&gt; 4             ANDS.CENTRE-1
-#&gt; 5  ANDS.CENTRE-1.REFQUALITY
-#&gt; 6             ANDS.CENTRE-2
-#&gt; 7  ANDS.CENTRE-2.REFQUALITY
-#&gt; 8             ANDS.CENTRE-3
-#&gt; 9  ANDS.CENTRE-3.REFQUALITY
-#&gt; 10            ANDS.CENTRE-5
-#&gt; # ... with 1,641 more rows, and 1 more variables: setName &lt;chr&gt;
-</code></pre>
-
-<h2>Examples of other OAI providers</h2>
-
-<h3>Global Biodiversity Information Facility</h3>
-
-<p>Identify</p>
-
-<pre><code class="r">id(&quot;http://api.gbif.org/v1/oai-pmh/registry&quot;)
-#&gt;   repositoryName                                 baseURL protocolVersion
-#&gt; 1  GBIF Registry http://api.gbif.org/v1/oai-pmh/registry             2.0
-#&gt;     adminEmail    earliestDatestamp deletedRecord          granularity
-#&gt; 1 dev@gbif.org 2007-01-01T00:00:01Z    persistent YYYY-MM-DDThh:mm:ssZ
-#&gt;                                                                                                                                                                                                                                                                                                                    description
-#&gt; 1 GBIF RegistryGlobal Biodiversity Information Facility Secretariat\n\t\tThe GBIF Registry — the entities that make up the GBIF network.\n\t\tThis OAI-PMH service exposes Datasets, organized into sets of country, installation and resource type.\n\t\tFor more information, see http://www.gbif.org/developer/registry\n\t
-</code></pre>
-
-<p>Get records</p>
-
-<pre><code class="r">get_records(c(&quot;816f4734-6b49-41ab-8a1d-1b21e6b5486d&quot;, &quot;95e3042f-f48d-4a04-8251-f755bebeced6&quot;),
-            url = &quot;http://api.gbif.org/v1/oai-pmh/registry&quot;)
-#&gt; # A tibble: 2 × 28
-#&gt;                             identifier            datestamp
-#&gt;                                  &lt;chr&gt;                &lt;chr&gt;
-#&gt; 1 816f4734-6b49-41ab-8a1d-1b21e6b5486d 2016-01-28T15:36:07Z
-#&gt; 2 95e3042f-f48d-4a04-8251-f755bebeced6 2016-08-30T13:43:31Z
-#&gt; # ... with 26 more variables: setSpec &lt;chr&gt;, setSpec.1 &lt;chr&gt;,
-#&gt; #   setSpec.2 &lt;chr&gt;, title &lt;chr&gt;, publisher &lt;chr&gt;, identifier.1 &lt;chr&gt;,
-#&gt; #   source &lt;chr&gt;, description &lt;chr&gt;, description.1 &lt;chr&gt;, type &lt;chr&gt;,
-#&gt; #   language &lt;chr&gt;, format &lt;chr&gt;, source.1 &lt;chr&gt;, subject &lt;chr&gt;,
-#&gt; #   subject.1 &lt;chr&gt;, subject.2 &lt;chr&gt;, subject.3 &lt;chr&gt;, subject.4 &lt;chr&gt;,
-#&gt; #   subject.5 &lt;chr&gt;, description.2 &lt;chr&gt;, creator &lt;chr&gt;, creator.1 &lt;chr&gt;,
-#&gt; #   date &lt;chr&gt;, coverage &lt;chr&gt;, coverage.1 &lt;chr&gt;, coverage.2 &lt;chr&gt;
+<pre><code class="r">list_sets(&quot;http://api.gbif.org/v1/oai-pmh/registry&quot;)
+#&gt; # A tibble: 572 x 2
+#&gt;    setSpec                     setName         
+#&gt;    &lt;chr&gt;                       &lt;chr&gt;           
+#&gt;  1 dataset_type                per dataset type
+#&gt;  2 dataset_type:OCCURRENCE     occurrence      
+#&gt;  3 dataset_type:CHECKLIST      checklist       
+#&gt;  4 dataset_type:METADATA       metadata        
+#&gt;  5 dataset_type:SAMPLING_EVENT sampling_event  
+#&gt;  6 country                     per country     
+#&gt;  7 country:AD                  Andorra         
+#&gt;  8 country:AO                  Angola          
+#&gt;  9 country:AR                  Argentina       
+#&gt; 10 country:AT                  Austria         
+#&gt; # … with 562 more rows
 </code></pre>
 
 <h3>Biodiversity Heritage Library</h3>
@@ -399,8 +370,8 @@ hr {
 <pre><code class="r">id(&quot;http://www.biodiversitylibrary.org/oai&quot;)
 #&gt;                                 repositoryName
 #&gt; 1 Biodiversity Heritage Library OAI Repository
-#&gt;                                  baseURL protocolVersion
-#&gt; 1 http://www.biodiversitylibrary.org/oai             2.0
+#&gt;                                   baseURL protocolVersion
+#&gt; 1 https://www.biodiversitylibrary.org/oai             2.0
 #&gt;                    adminEmail earliestDatestamp deletedRecord granularity
 #&gt; 1 oai@biodiversitylibrary.org        2006-01-01            no  YYYY-MM-DD
 #&gt;                                                        description
@@ -411,15 +382,34 @@ hr {
 
 <pre><code class="r">get_records(c(&quot;oai:biodiversitylibrary.org:item/7&quot;, &quot;oai:biodiversitylibrary.org:item/9&quot;),
             url = &quot;http://www.biodiversitylibrary.org/oai&quot;)
-#&gt; # A tibble: 2 × 17
-#&gt;                           identifier            datestamp setSpec
-#&gt;                                &lt;chr&gt;                &lt;chr&gt;   &lt;chr&gt;
-#&gt; 1 oai:biodiversitylibrary.org:item/7 2016-07-13T08:13:41Z    item
-#&gt; 2 oai:biodiversitylibrary.org:item/9 2016-07-13T08:13:41Z    item
-#&gt; # ... with 14 more variables: title &lt;chr&gt;, creator &lt;chr&gt;, subject &lt;chr&gt;,
-#&gt; #   subject.1 &lt;chr&gt;, subject.2 &lt;chr&gt;, description &lt;chr&gt;, publisher &lt;chr&gt;,
-#&gt; #   contributor &lt;chr&gt;, date &lt;chr&gt;, type &lt;chr&gt;, type.1 &lt;chr&gt;,
-#&gt; #   identifier.1 &lt;chr&gt;, language &lt;chr&gt;, rights &lt;chr&gt;
+#&gt; $`oai:biodiversitylibrary.org:item/7`
+#&gt; $`oai:biodiversitylibrary.org:item/7`$header
+#&gt; # A tibble: 1 x 3
+#&gt;   identifier                         datestamp            setSpec
+#&gt;   &lt;chr&gt;                              &lt;chr&gt;                &lt;chr&gt;  
+#&gt; 1 oai:biodiversitylibrary.org:item/7 2016-07-13T09:13:41Z item   
+#&gt; 
+#&gt; $`oai:biodiversitylibrary.org:item/7`$metadata
+#&gt; # A tibble: 1 x 11
+#&gt;   title creator subject description publisher contributor date  type 
+#&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
+#&gt; 1 Die … Fleisc… Bogor;… pt.5:v.1 (… Leiden :… Missouri B… 1900… text…
+#&gt; # … with 3 more variables: identifier &lt;chr&gt;, language &lt;chr&gt;, rights &lt;chr&gt;
+#&gt; 
+#&gt; 
+#&gt; $`oai:biodiversitylibrary.org:item/9`
+#&gt; $`oai:biodiversitylibrary.org:item/9`$header
+#&gt; # A tibble: 1 x 3
+#&gt;   identifier                         datestamp            setSpec
+#&gt;   &lt;chr&gt;                              &lt;chr&gt;                &lt;chr&gt;  
+#&gt; 1 oai:biodiversitylibrary.org:item/9 2016-07-13T09:13:41Z item   
+#&gt; 
+#&gt; $`oai:biodiversitylibrary.org:item/9`$metadata
+#&gt; # A tibble: 1 x 11
+#&gt;   title creator subject description publisher contributor date  type 
+#&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
+#&gt; 1 Die … Fleisc… Bogor;… pt.5:v.3 (… Leiden :… Missouri B… 1906… text…
+#&gt; # … with 3 more variables: identifier &lt;chr&gt;, language &lt;chr&gt;, rights &lt;chr&gt;
 </code></pre>
 
 </body>

@@ -9,22 +9,23 @@ update_providers(path = ".", ...)
 \arguments{
 \item{path}{Path to put data in.}
 
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}}
+\item{...}{Curl options passed on to \code{\link[httr:GET]{httr::GET()}}}
 }
 \description{
-Data comes from \url{http://www.openarchives.org/Register/BrowseSites}.
-Data includes oai-identifier (if they have one) and baes URL. The website has
+Data comes from
+\url{http://www.openarchives.org/Register/BrowseSites}. Data includes
+oai-identifier (if they have one) and baes URL. The website has
 the name of the data provider too, but not provided in the data pulled
 down here, but you can grab the name using example below.
 }
 \details{
 This table is scraped from
-		\url{http://www.openarchives.org/Register/BrowseSites}.
-		I would get it from \url{http://www.openarchives.org/Register/ListFriends},
-		but it does not include repository names.
+\url{http://www.openarchives.org/Register/BrowseSites}.
+I would get it from \url{http://www.openarchives.org/Register/ListFriends},
+but it does not include repository names.
 
-		This function updates the table for you. Does take a while though, so
-		go get a coffee.
+This function updates the table for you. Does take a while though, so
+go get a coffee.
 }
 \examples{
 \dontrun{
@@ -33,6 +34,5 @@ load_providers()
 }
 }
 \seealso{
-\code{\link{load_providers}}
+\code{\link[=load_providers]{load_providers()}}
 }
-

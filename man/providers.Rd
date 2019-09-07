@@ -7,13 +7,12 @@
 \value{
 A data.frame of three columns:
 \itemize{
- \item repo_name - Name of the OAI repository
- \item base_url - Base URL of the OAI repository
- \item oai_identifier - OAI identifier for the OAI repository
+\item repo_name - Name of the OAI repository
+\item base_url - Base URL of the OAI repository
+\item oai_identifier - OAI identifier for the OAI repository
 }
 }
 \description{
 Metadata providers data.frame.
 }
 \keyword{datasets}
-

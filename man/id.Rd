@@ -4,10 +4,15 @@
 \alias{id}
 \title{Identify the OAI-PMH service for each data provider.}
 \usage{
-id(url, ...)
+id(url, as = "parsed", ...)
 }
 \arguments{
-\item{url}{(character) OAI-PMH base url}
+\item{url}{(character) OAI-PMH base url. Defaults to the URL for
+arXiv's OAI-PMH server (http://export.arxiv.org/oai2)
+or GBIF's OAI-PMH server (http://api.gbif.org/v1/oai-pmh/registry)}
+
+\item{as}{(character) What to return. One of "parsed" (default),
+or "raw" (raw text)}
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}}
 }
@@ -16,18 +21,18 @@ Identify the OAI-PMH service for each data provider.
 }
 \examples{
 \dontrun{
-# datacite
-id("http://oai.datacite.org/oai")
-
 # arxiv
 id("http://export.arxiv.org/oai2")
 
 # GBIF - http://www.gbif.org/
 id("http://api.gbif.org/v1/oai-pmh/registry")
 
+# get back text instead of parsed
+id("http://export.arxiv.org/oai2", as = "raw")
+id("http://api.gbif.org/v1/oai-pmh/registry", as = "raw")
+
 # curl options
 library("httr")
 id("http://export.arxiv.org/oai2", config = verbose())
 }
 }
-

@@ -17,7 +17,7 @@ error_url <- list(
 # GET and parse
 gnp <- function(u) {
   r <- httr::GET(u)
-  xml2::read_xml( httr::content(r, "text"))
+  xml2::read_xml( httr::content(r, "text", encoding = "UTF-8"))
 }
 
 
