@@ -1,15 +1,15 @@
 #' @title Update the locally stored OAI-PMH data providers table.
 #'
 #' @description Data comes from
-#' <http://www.openarchives.org/Register/BrowseSites>. Data includes
-#' oai-identifier (if they have one) and baes URL. The website has
+#' <http://www.openarchives.org/Register/BrowseSites>. It includes the
+#' oai-identifier (if they have one) and the base URL. The website has
 #' the name of the data provider too, but not provided in the data pulled
-#' down here, but you can grab the name using example below.
+#' down here, but you can grab the name using the example below.
 #'
 #' @export
 #' @details This table is scraped from
 #' <http://www.openarchives.org/Register/BrowseSites>.
-#' I would get it from <http://www.openarchives.org/Register/ListFriends>,
+#' I would get it from <http://www.openarchives.org/pmh/registry/ListFriends>,
 #' but it does not include repository names.
 #'
 #' This function updates the table for you. Does take a while though, so
