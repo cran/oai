@@ -206,15 +206,10 @@ hr {
 %\VignetteIndexEntry{oai introduction}
 %\VignetteEncoding{UTF-8}
 -->
-
 <h1>oai introduction</h1>
-
-<p>A general purpose client to work with any &#39;OAI-PMH&#39; service. </p>
-
-<p>The &#39;OAI-PMH&#39; protocol is described at <a href="http://www.openarchives.org/OAI/openarchivesprotocol.html">http://www.openarchives.org/OAI/openarchivesprotocol.html</a>.</p>
-
+<p>A general purpose client to work with any ‘OAI-PMH’ service.</p>
+<p>The ‘OAI-PMH’ protocol is described at <a href="http://www.openarchives.org/OAI/openarchivesprotocol.html">http://www.openarchives.org/OAI/openarchivesprotocol.html</a>.</p>
 <p>The main functions follow the OAI-PMH verbs:</p>
-
 <ul>
 <li><code>GetRecord</code></li>
 <li><code>Identify</code></li>
@@ -223,27 +218,18 @@ hr {
 <li><code>ListRecords</code></li>
 <li><code>ListSets</code></li>
 </ul>
-
 <h2>Get oai</h2>
-
 <p>Install from CRAN</p>
-
-<pre><code class="r">install.packages(&quot;oai&quot;)
+<pre><code class="language-r">install.packages(&quot;oai&quot;)
 </code></pre>
-
 <p>Or install the development version from GitHub</p>
-
-<pre><code class="r">devtools::install_github(&quot;ropensci/oai&quot;)
+<pre><code class="language-r">devtools::install_github(&quot;ropensci/oai&quot;)
 </code></pre>
-
 <p>Load <code>oai</code></p>
-
-<pre><code class="r">library(&quot;oai&quot;)
+<pre><code class="language-r">library(&quot;oai&quot;)
 </code></pre>
-
 <h2>Identify</h2>
-
-<pre><code class="r">id(&quot;http://oai.datacite.org/oai&quot;)
+<pre><code class="language-r">id(&quot;http://oai.datacite.org/oai&quot;)
 #&gt;   repositoryName                      baseURL protocolVersion
 #&gt; 1   DataCite MDS https://oai.datacite.org/oai             2.0
 #&gt;             adminEmail    earliestDatestamp deletedRecord
@@ -253,10 +239,8 @@ hr {
 #&gt;                                      description
 #&gt; 1 oaioai.datacite.org:oai:oai.datacite.org:12425
 </code></pre>
-
 <h2>ListIdentifiers</h2>
-
-<pre><code class="r">list_identifiers(from = &#39;2018-05-01T&#39;, until = &#39;2018-09-01T&#39;)
+<pre><code class="language-r">list_identifiers(from = '2018-05-01T', until = '2018-09-01T')
 #&gt; # A tibble: 2,904 x 5
 #&gt;    identifier        datestamp    setSpec           setSpec.1     setSpec.2
 #&gt;    &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;             &lt;chr&gt;         &lt;chr&gt;    
@@ -272,15 +256,11 @@ hr {
 #&gt; 10 34fbcf59-d9bb-47… 2018-08-27T… installation:7c5… dataset_type… country:…
 #&gt; # … with 2,894 more rows
 </code></pre>
-
 <h2>Count Identifiers</h2>
-
-<pre><code class="r">count_identifiers()
+<pre><code class="language-r">count_identifiers()
 </code></pre>
-
 <h2>ListRecords</h2>
-
-<pre><code class="r">list_records(from = &#39;2018-05-01T&#39;, until = &#39;2018-05-15T&#39;)
+<pre><code class="language-r">list_records(from = '2018-05-01T', until = '2018-05-15T')
 #&gt; # A tibble: 44 x 26
 #&gt;    identifier datestamp setSpec setSpec.1 setSpec.2 title publisher
 #&gt;    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    
@@ -301,10 +281,8 @@ hr {
 #&gt; #   coverage.2 &lt;chr&gt;, creator.1 &lt;chr&gt;, description.2 &lt;chr&gt;,
 #&gt; #   creator.2 &lt;chr&gt;, subject.2 &lt;chr&gt;
 </code></pre>
-
 <h2>GetRecords</h2>
-
-<pre><code class="r">ids &lt;- c(&quot;87832186-00ea-44dd-a6bf-c2896c4d09b4&quot;, &quot;d981c07d-bc43-40a2-be1f-e786e25106ac&quot;)
+<pre><code class="language-r">ids &lt;- c(&quot;87832186-00ea-44dd-a6bf-c2896c4d09b4&quot;, &quot;d981c07d-bc43-40a2-be1f-e786e25106ac&quot;)
 get_records(ids)
 #&gt; $`87832186-00ea-44dd-a6bf-c2896c4d09b4`
 #&gt; $`87832186-00ea-44dd-a6bf-c2896c4d09b4`$header
@@ -331,10 +309,8 @@ get_records(ids)
 #&gt; 1 Pece… Institut… https://w… peces,… http:… Caracteriz… Data… Fernan… 2018…
 #&gt; # … with 3 more variables: language &lt;chr&gt;, coverage &lt;chr&gt;, format &lt;chr&gt;
 </code></pre>
-
 <h2>List MetadataFormats</h2>
-
-<pre><code class="r">list_metadataformats(id = &quot;87832186-00ea-44dd-a6bf-c2896c4d09b4&quot;)
+<pre><code class="language-r">list_metadataformats(id = &quot;87832186-00ea-44dd-a6bf-c2896c4d09b4&quot;)
 #&gt; $`87832186-00ea-44dd-a6bf-c2896c4d09b4`
 #&gt;   metadataPrefix                                                   schema
 #&gt; 1         oai_dc           http://www.openarchives.org/OAI/2.0/oai_dc.xsd
@@ -343,10 +319,8 @@ get_records(ids)
 #&gt; 1 http://www.openarchives.org/OAI/2.0/oai_dc/
 #&gt; 2          eml://ecoinformatics.org/eml-2.1.1
 </code></pre>
-
 <h2>List Sets</h2>
-
-<pre><code class="r">list_sets(&quot;http://api.gbif.org/v1/oai-pmh/registry&quot;)
+<pre><code class="language-r">list_sets(&quot;http://api.gbif.org/v1/oai-pmh/registry&quot;)
 #&gt; # A tibble: 572 x 2
 #&gt;    setSpec                     setName         
 #&gt;    &lt;chr&gt;                       &lt;chr&gt;           
@@ -362,12 +336,9 @@ get_records(ids)
 #&gt; 10 country:AT                  Austria         
 #&gt; # … with 562 more rows
 </code></pre>
-
 <h3>Biodiversity Heritage Library</h3>
-
 <p>Identify</p>
-
-<pre><code class="r">id(&quot;http://www.biodiversitylibrary.org/oai&quot;)
+<pre><code class="language-r">id(&quot;http://www.biodiversitylibrary.org/oai&quot;)
 #&gt;                                 repositoryName
 #&gt; 1 Biodiversity Heritage Library OAI Repository
 #&gt;                                   baseURL protocolVersion
@@ -377,10 +348,8 @@ get_records(ids)
 #&gt;                                                        description
 #&gt; 1 oaibiodiversitylibrary.org:oai:biodiversitylibrary.org:item/1000
 </code></pre>
-
 <p>Get records</p>
-
-<pre><code class="r">get_records(c(&quot;oai:biodiversitylibrary.org:item/7&quot;, &quot;oai:biodiversitylibrary.org:item/9&quot;),
+<pre><code class="language-r">get_records(c(&quot;oai:biodiversitylibrary.org:item/7&quot;, &quot;oai:biodiversitylibrary.org:item/9&quot;),
             url = &quot;http://www.biodiversitylibrary.org/oai&quot;)
 #&gt; $`oai:biodiversitylibrary.org:item/7`
 #&gt; $`oai:biodiversitylibrary.org:item/7`$header

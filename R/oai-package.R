@@ -1,4 +1,6 @@
-#' oai is an R client to work with OAI-PMH (Open Archives
+#' @description \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+#' 
+#' @description \pkg{oai} is an R client to work with OAI-PMH (Open Archives
 #' Initiative Protocol for Metadata Harvesting) services, a protocol
 #' developed by the Open Archives Initiative 
 #' (https://en.wikipedia.org/wiki/Open_Archives_Initiative).
@@ -35,7 +37,7 @@
 #' @title OAI-PMH Client
 #' @keywords package
 #'
-#' @importFrom httr GET content stop_for_status
+#' @importFrom httr RETRY GET content stop_for_status
 #' @importFrom xml2 read_xml xml_children xml_text as_list xml_attrs
 #' xml_name xml_attr xml_ns
 #' @importFrom plyr rbind.fill
@@ -43,7 +45,7 @@
 #'
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @author Michal Bojanowski \email{michal2992@@gmail.com}
-NULL
+"_PACKAGE"
 
 #' Metadata providers data.frame.
 #'
